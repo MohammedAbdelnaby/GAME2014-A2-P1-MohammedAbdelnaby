@@ -6,7 +6,7 @@ public class Enemy : Character
 {
     protected override void Start()
     {
-        Debug.Log(this.gameObject.name);
+        base.Start();
     }
 
     protected override void Update()
