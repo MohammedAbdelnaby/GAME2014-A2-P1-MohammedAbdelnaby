@@ -1051,6 +1051,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9073663173630929512, guid: a8c6b631dc0988e4cab4b5136ec6fe1d, type: 3}
   m_PrefabInstance: {fileID: 9073663174409027442}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &836883739 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 836883739, guid: a8c6b631dc0988e4cab4b5136ec6fe1d, type: 3}
+  m_PrefabInstance: {fileID: 9073663174409027442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402cb4af0c69cc347bb892a1a2274c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &838770935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,7 +3093,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3372,7 +3383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237187658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.177779, y: -11.599749, z: -10.053192}
+  m_LocalPosition: {x: 15.216434, y: -6.1197486, z: -10.053192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3427,7 +3438,7 @@ GameObject:
   - component: {fileID: 1254250045}
   - component: {fileID: 1254250044}
   - component: {fileID: 1254250043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11366,7 +11377,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2453eb43985a9b640a3eaa290fea6e5f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -11415,7 +11426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385548638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.896434, y: -11.599749, z: -10.053192}
+  m_LocalPosition: {x: 15.216434, y: -6.1197486, z: -10.053192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11814,7 +11825,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 229410878, guid: a11ea103d81f8dd4b896a5dcd08d3fcc, type: 3}
     m_PressedSprite: {fileID: 229410878, guid: a11ea103d81f8dd4b896a5dcd08d3fcc, type: 3}
-    m_SelectedSprite: {fileID: 229410878, guid: a11ea103d81f8dd4b896a5dcd08d3fcc, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 2010141672, guid: a11ea103d81f8dd4b896a5dcd08d3fcc, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -11826,7 +11837,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2064736214}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 836883739}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2064736214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12002,11 +12025,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9073663173630929512, guid: a8c6b631dc0988e4cab4b5136ec6fe1d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 9073663173630929512, guid: a8c6b631dc0988e4cab4b5136ec6fe1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: 9073663173630929512, guid: a8c6b631dc0988e4cab4b5136ec6fe1d, type: 3}
       propertyPath: m_LocalPosition.z

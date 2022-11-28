@@ -19,9 +19,9 @@ public class Enemy : Character
         base.Move();
     }
 
-    public override void Flip()
+    public override void Flip(float value)
     {
-        base.Flip();
+        base.Flip(0.0f);
     }
 
     public override void Jump()

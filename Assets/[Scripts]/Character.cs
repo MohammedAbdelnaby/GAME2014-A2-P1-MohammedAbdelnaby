@@ -29,5 +29,11 @@ public class Character : MonoBehaviour
 
     public virtual void Move() { }
     public virtual void Jump() { }
-    public virtual void Flip() { }
+    public virtual void Flip(float value) 
+    {
+        if (value != 0.0f)
+        {
+            transform.localScale = new Vector3((value > 0.0f) ? 1.0f : -1.0f, 1.0f, 1.0f);
+        }
+    }
 }
