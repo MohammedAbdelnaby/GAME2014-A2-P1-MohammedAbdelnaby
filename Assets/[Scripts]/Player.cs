@@ -12,6 +12,8 @@ public class Player : Character
 
     [Header("Player Properties")]
     public bool CanDoubleJump;
+    public float WallDetectionLength;
+    public bool OnWall;
 
     [Header("Animation")]
     public Animator animator;
@@ -26,7 +28,10 @@ public class Player : Character
     protected override void Update()
     {
         IsGrounded = Physics2D.OverlapCircle(GroundPoint.position, GroundRadius, GroundLayerMask);
+        OnWall = Physics2D.Linecast(new Vector3(transform.position.x, transform.position.y, 0.0f),
+                        new Vector3(transform.position.x + WallDetectionLength, transform.position.y, 0.0f), GroundLayerMask);
         Move();
+        AirCheck();
     }
 
     public override void Move()
@@ -55,12 +60,26 @@ public class Player : Character
         base.Flip(value);
     }
 
+    void IsOnWall()
+    {
+        if (OnWall && !IsGrounded)
+        {
+
+        }
+    }
+
     public override void Jump()
     {
 
         if ((IsGrounded))
         {
             rigidbody2D.AddForce(Vector2.up * VerticalForce, ForceMode2D.Impulse);
+            CanDoubleJump = true;
+        }
+         if(CanDoubleJump && !IsGrounded)
+        {
+            rigidbody2D.AddForce(Vector2.up * VerticalForce/1.5f, ForceMode2D.Impulse);
+            CanDoubleJump = false;
         }
     }
 
@@ -70,9 +89,24 @@ public class Player : Character
         animator.SetInteger("AnimationState", (int)playerAnimationState);
     }
 
+    private void AirCheck()
+    {
+        if (!IsGrounded && CanDoubleJump)
+        {
+            ChangeAnimation(PlayerAnimationState.JUMP);
+        }
+        else if(!IsGrounded && !CanDoubleJump)
+        {
+            ChangeAnimation(PlayerAnimationState.DOUBLE_JUMP);
+        }
+    }
+
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(GroundPoint.position, GroundRadius);
+
+        Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y, 0.0f),
+                        new Vector3(transform.position.x + WallDetectionLength, transform.position.y, 0.0f));
     }
 }

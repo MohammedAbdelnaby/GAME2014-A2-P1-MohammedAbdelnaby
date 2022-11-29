@@ -8,5 +8,6 @@ public enum PlayerAnimationState
     IDLE,
     RUN,
     JUMP,
-    DOUBLE_JUMP
+    DOUBLE_JUMP,
+    ON_WALL
 }
