@@ -37,7 +37,7 @@ public class Player : Character
 
     protected override void Update()
     {
-        if (Life.LifeCount <= 0)
+        if (Life != null && Life.LifeCount <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
@@ -55,6 +55,7 @@ public class Player : Character
         if (transform.position.y <= DeathPlaneValue)
         {
             transform.position = CheckPointPostion.position;
+            Life.LifeCount--;
         }
     }
 
