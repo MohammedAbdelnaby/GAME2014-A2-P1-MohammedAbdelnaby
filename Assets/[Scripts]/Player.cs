@@ -1,37 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : Character
 {
     /*TODO:
-     * - Player Movement
-     * - Player Jump
-     * - Player animation changes
+     * - 
      */
 
     [Header("Player Properties")]
     public bool CanDoubleJump;
-    public float WallDetectionLength;
+    public Transform WallDetectionLength;
     public bool OnWall;
+    public Transform CheckPointPostion;
+    public float DeathPlaneValue;
+
+    [Header("Player UI Properties")]
+    public LifeSystem Life;
+    public int Score;
+    public TMP_Text ScoreText;
 
     [Header("Animation")]
     public Animator animator;
     public PlayerAnimationState playerAnimationState;
 
+    private int LifeLevelUp;
+
     protected override void Start()
     {
         base.rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        LifeLevelUp = 1000;
     }
 
     protected override void Update()
     {
+        if (Life.LifeCount <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
         IsGrounded = Physics2D.OverlapCircle(GroundPoint.position, GroundRadius, GroundLayerMask);
         OnWall = Physics2D.Linecast(new Vector3(transform.position.x, transform.position.y, 0.0f),
-                        new Vector3(transform.position.x + WallDetectionLength, transform.position.y, 0.0f), GroundLayerMask);
+                                    new Vector3(WallDetectionLength.position.x, WallDetectionLength.position.y, 0.0f), GroundLayerMask);
         Move();
         AirCheck();
+        IsOnWall();
+        DeathPlane();
+    }
+
+    void DeathPlane()
+    {
+        if (transform.position.y <= DeathPlaneValue)
+        {
+            transform.position = CheckPointPostion.position;
+        }
     }
 
     public override void Move()
@@ -41,7 +65,6 @@ public class Player : Character
         {
             base.Flip(X);
             X = (X > 0.0f) ? 1.0f : -1.0f;
-
             rigidbody2D.AddForce(Vector2.right * X * HorizontalForce * ((IsGrounded) ? 1.0f : AirFactor));
 
             var clampedXVelocity = Mathf.Clamp(rigidbody2D.velocity.x, -HorizontalSpeed, HorizontalSpeed);
@@ -64,12 +87,16 @@ public class Player : Character
     {
         if (OnWall && !IsGrounded)
         {
-
+            ChangeAnimation(PlayerAnimationState.ON_WALL);
         }
     }
 
     public override void Jump()
     {
+        if (OnWall && !IsGrounded)
+        {
+            rigidbody2D.AddForce(((transform.localScale.x > 0.0f) ? Vector2.left : Vector2.right) + Vector2.up * VerticalForce, ForceMode2D.Impulse);
+        }
 
         if ((IsGrounded))
         {
@@ -105,8 +132,22 @@ public class Player : Character
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(GroundPoint.position, GroundRadius);
-
         Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y, 0.0f),
-                        new Vector3(transform.position.x + WallDetectionLength, transform.position.y, 0.0f));
+                        new Vector3(WallDetectionLength.position.x, WallDetectionLength.position.y, 0.0f));
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Fruit")
+        {
+            Score += 100;
+            ScoreText.text = "x " + Score.ToString();
+            Destroy(collision.gameObject);
+            if (Score >= LifeLevelUp)
+            {
+                Life.LifeCount++;
+                LifeLevelUp += 1000;
+            }
+        }
     }
 }

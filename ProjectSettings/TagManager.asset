@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fruit
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3053637789
+    locked: 0
+  - name: Fruits
+    uniqueID: 2197751143
     locked: 0
   - name: Ground
     uniqueID: 568342207
