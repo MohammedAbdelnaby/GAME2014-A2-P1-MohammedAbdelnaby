@@ -59,12 +59,12 @@ public class Player : Character
         }
     }
 
-    public override void Move()
+    protected override void Move()
     {
         float X = Input.GetAxisRaw("Horizontal");
         if (X != 0.0f)
         {
-            base.Flip(X);
+            Flip(X);
             X = (X > 0.0f) ? 1.0f : -1.0f;
             rigidbody2D.AddForce(Vector2.right * X * HorizontalForce * ((IsGrounded) ? 1.0f : AirFactor));
 
@@ -79,11 +79,6 @@ public class Player : Character
         }
     }
 
-    public override void Flip(float value)
-    {
-        base.Flip(value);
-    }
-
     void IsOnWall()
     {
         if (OnWall && !IsGrounded)
@@ -92,7 +87,7 @@ public class Player : Character
         }
     }
 
-    public override void Jump()
+    protected override void Jump()
     {
         if (OnWall && !IsGrounded)
         {

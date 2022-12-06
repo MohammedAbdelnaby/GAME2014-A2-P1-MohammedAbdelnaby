@@ -27,13 +27,19 @@ public class Character : MonoBehaviour
 
     }
 
-    public virtual void Move() { }
-    public virtual void Jump() { }
-    public virtual void Flip(float value) 
+    protected virtual void Move() { }
+    protected virtual void Jump() { }
+    protected virtual void Flip(float value) 
     {
         if (value != 0.0f)
         {
             transform.localScale = new Vector3((value > 0.0f) ? 1.0f : -1.0f, 1.0f, 1.0f);
         }
+    }
+
+    protected virtual void Flip()
+    {
+        var X = transform.localScale.x * -1.0f;
+        transform.localScale = new Vector3(X, 1.0f, 1.0f);
     }
 }

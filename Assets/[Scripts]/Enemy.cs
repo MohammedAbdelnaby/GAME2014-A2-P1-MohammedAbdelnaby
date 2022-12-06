@@ -4,28 +4,46 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    public bool HitWall;
+    public Transform FrontWhisker;
+    public Vector2 Direction;
     protected override void Start()
     {
-        base.Start();
+        base.rigidbody2D = GetComponent<Rigidbody2D>();
+        Direction = Vector2.right;
     }
-
     protected override void Update()
     {
-        base.Update();
+        if(FrontWhisker != null)
+            HitWall = Physics2D.Linecast(transform.position, FrontWhisker.position, GroundLayerMask);
+        Move();
     }
 
-    public override void Move()
+    protected override void Move()
     {
-        base.Move();
+        if (HitWall)
+        {
+            Flip();
+            Direction *= -1.0f;
+        }
+        rigidbody2D.AddForce(Direction * HorizontalForce);
+        var clampedXVelocity = Mathf.Clamp(rigidbody2D.velocity.x, -HorizontalSpeed, HorizontalSpeed);
+        rigidbody2D.velocity = new Vector2(clampedXVelocity, rigidbody2D.velocity.y);
     }
 
-    public override void Flip(float value)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        base.Flip(0.0f);
+        if (collision.gameObject.name == "Player" && collision.transform.position.y - collision.gameObject.GetComponent<BoxCollider2D>().size.y/2 > transform.position.y + GetComponent<BoxCollider2D>().size.y / 2)
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5.0f, ForceMode2D.Impulse);
+            Destroy(this.gameObject);
+        }
     }
 
-    public override void Jump()
+    public void OnDrawGizmos()
     {
-        base.Jump();
+        Gizmos.color = Color.red;
+        if (FrontWhisker != null)
+            Gizmos.DrawLine(transform.position, FrontWhisker.position);
     }
 }
