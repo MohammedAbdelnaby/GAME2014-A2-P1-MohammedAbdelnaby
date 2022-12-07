@@ -54,8 +54,18 @@ public class Player : Character
     {
         if (transform.position.y <= DeathPlaneValue)
         {
-            transform.position = CheckPointPostion.position;
-            Life.LifeCount--;
+            Die();
+        }
+    }
+
+    public void SetScore(int value)
+    {
+        Score += value;
+        ScoreText.text = "x " + Score.ToString();
+        if (Score >= LifeLevelUp)
+        {
+            Life.LifeCount++;
+            LifeLevelUp += 1000;
         }
     }
 
@@ -106,6 +116,12 @@ public class Player : Character
         }
     }
 
+    public void Die()
+    {
+        transform.position = CheckPointPostion.position;
+        Life.LifeCount--;
+    }
+
     private void ChangeAnimation(PlayerAnimationState animationState)
     {
         playerAnimationState = animationState;
@@ -136,14 +152,8 @@ public class Player : Character
     {
         if (collision.gameObject.tag == "Fruit")
         {
-            Score += 100;
-            ScoreText.text = "x " + Score.ToString();
+            SetScore(100);
             Destroy(collision.gameObject);
-            if (Score >= LifeLevelUp)
-            {
-                Life.LifeCount++;
-                LifeLevelUp += 1000;
-            }
         }
     }
 }

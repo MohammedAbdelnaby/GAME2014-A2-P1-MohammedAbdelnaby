@@ -17,7 +17,6 @@ public class FinishLine : MonoBehaviour
 
     IEnumerator Win()
     {
-        Debug.Log("Win");
         yield return new WaitForSeconds(2.0f);
         
         SceneManager.LoadScene("Win");

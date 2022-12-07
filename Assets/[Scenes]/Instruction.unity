@@ -702,8 +702,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 290, y: 157.52}
-  m_SizeDelta: {x: 1260.18, y: 315.04}
+  m_AnchoredPosition: {x: -154.55, y: 159.13}
+  m_SizeDelta: {x: 2030.42, y: 826.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307360840
 MonoBehaviour:
@@ -725,7 +725,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'A - Left
+
+    D - Right
+
+    Space - Jump
+
+    Double Space - Double Jump
+
+
+    Jump
+    on enemies to kill them
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: befdc8c41e43494438cb9a0c1a02588f, type: 2}
   m_sharedMaterial: {fileID: -7075436377257306059, guid: befdc8c41e43494438cb9a0c1a02588f, type: 2}
@@ -734,8 +746,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291607552
+  m_fontColor: {r: 0, g: 0.73646665, b: 0.8018868, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -752,13 +764,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 83.72
-  m_fontSizeBase: 83.72
+  m_fontSize: 128.57
+  m_fontSizeBase: 128.57
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1137,7 +1149,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 568342207
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

@@ -4,5 +4,22 @@ using UnityEngine;
 
 public class PigEnemy : Enemy
 {
+    protected void Start()
+    {
+        base.Start();
+    }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    protected override void Move()
+    {
+        base.Move();
+    }
+    public void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+    }
 }

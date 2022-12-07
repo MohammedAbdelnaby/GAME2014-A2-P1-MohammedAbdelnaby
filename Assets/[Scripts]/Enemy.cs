@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public bool HitWall;
+    [Header("Enemy Properties")]
     public Transform FrontWhisker;
-    public Vector2 Direction;
+
+    protected bool HitWall;
+    protected Vector2 Direction;
+
     protected override void Start()
     {
         base.rigidbody2D = GetComponent<Rigidbody2D>();
@@ -31,12 +34,18 @@ public class Enemy : Character
         rigidbody2D.velocity = new Vector2(clampedXVelocity, rigidbody2D.velocity.y);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Player" && collision.transform.position.y - collision.gameObject.GetComponent<BoxCollider2D>().size.y/2 > transform.position.y + GetComponent<BoxCollider2D>().size.y / 2)
         {
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5.0f, ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Player>().SetScore(500);
             Destroy(this.gameObject);
+            return;
+        }
+        if (collision.gameObject.name == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().Die();
         }
     }
 
