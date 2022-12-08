@@ -9,11 +9,12 @@ public class Enemy : Character
 
     protected bool HitWall;
     protected Vector2 Direction;
-
+    protected SoundManager soundManager;
     protected override void Start()
     {
         base.rigidbody2D = GetComponent<Rigidbody2D>();
-        Direction = Vector2.right;
+        Direction = Vector2.left;
+        soundManager = FindObjectOfType<SoundManager>();
     }
     protected override void Update()
     {
@@ -40,6 +41,7 @@ public class Enemy : Character
         {
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5.0f, ForceMode2D.Impulse);
             collision.gameObject.GetComponent<Player>().SetScore(500);
+            soundManager.PlaySoundFX(Sound.ENEMYDEATH, Channel.ENEMY_SOUND_ENEMYDEATH);
             Destroy(this.gameObject);
             return;
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PigEnemy : Enemy
+public class BatEnemy : Enemy
 {
     protected override void Start()
     {

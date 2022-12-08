@@ -20,11 +20,6 @@ public class ButtonManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void Pause()
-    {
-
-    }
-
     public void Back()
     {
         SceneManager.LoadScene("MainMenu");

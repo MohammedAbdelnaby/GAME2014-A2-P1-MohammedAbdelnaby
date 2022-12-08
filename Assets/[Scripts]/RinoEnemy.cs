@@ -18,6 +18,7 @@ public class RinoEnemy : Enemy
         Direction = Vector2.left;
         Raduis = GetComponent<CircleCollider2D>().radius;
         animator = GetComponent<Animator>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
     protected override void Update()
     {
@@ -72,17 +73,11 @@ public class RinoEnemy : Enemy
         }
     }
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Player" && collision.transform.position.y - collision.gameObject.GetComponent<BoxCollider2D>().size.y / 2 > transform.position.y + GetComponent<BoxCollider2D>().size.y / 2)
-        {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5.0f, ForceMode2D.Impulse);
-            collision.gameObject.GetComponent<Player>().SetScore(500);
-            Destroy(this.gameObject);
-            return;
-        }
         if (collision.gameObject.name == "Player")
         {
+            soundManager.PlaySoundFX(Sound.DEATH, Channel.PLAYER_SOUND_DEATH);
             collision.gameObject.GetComponent<Player>().Die();
         }
     }

@@ -22,16 +22,22 @@ public class Player : Character
     public int Score;
     public TMP_Text ScoreText;
 
+    [Header("Controls")]
+    public Joystick leftStick;
+
     [Header("Animation")]
     public Animator animator;
     public PlayerAnimationState playerAnimationState;
 
     private int LifeLevelUp;
+    private SoundManager soundManager;
 
     protected override void Start()
     {
+        leftStick = (Application.isMobilePlatform) ? GameObject.Find("LeftStick").GetComponent<Joystick>() : null;
         base.rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        soundManager = FindObjectOfType<SoundManager>();
         LifeLevelUp = 1000;
     }
 
@@ -71,7 +77,7 @@ public class Player : Character
 
     protected override void Move()
     {
-        float X = Input.GetAxisRaw("Horizontal");
+        float X = Input.GetAxisRaw("Horizontal") + ((Application.isMobilePlatform) ? leftStick.Horizontal : 0.0f);
         if (X != 0.0f)
         {
             Flip(X);
@@ -102,16 +108,19 @@ public class Player : Character
         if (OnWall && !IsGrounded)
         {
             rigidbody2D.AddForce(((transform.localScale.x > 0.0f) ? Vector2.left : Vector2.right) + Vector2.up * VerticalForce, ForceMode2D.Impulse);
+            soundManager.PlaySoundFX(Sound.JUMP, Channel.PLAYER_SOUND_JUMP);
         }
 
         if ((IsGrounded))
         {
             rigidbody2D.AddForce(Vector2.up * VerticalForce, ForceMode2D.Impulse);
+            soundManager.PlaySoundFX(Sound.JUMP, Channel.PLAYER_SOUND_JUMP);
             CanDoubleJump = true;
         }
          if(CanDoubleJump && !IsGrounded)
         {
             rigidbody2D.AddForce(Vector2.up * VerticalForce/1.5f, ForceMode2D.Impulse);
+            soundManager.PlaySoundFX(Sound.JUMP, Channel.PLAYER_SOUND_JUMP);
             CanDoubleJump = false;
         }
     }
@@ -154,6 +163,7 @@ public class Player : Character
         {
             SetScore(100);
             Destroy(collision.gameObject);
+            soundManager.PlaySoundFX(Sound.FRUIT_PICKUP, Channel.PLAYER_SOUND_FRUIT_PICKUP);
         }
     }
 }
