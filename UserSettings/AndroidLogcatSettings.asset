@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "emulator-5554",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "emulator-5554",
+        "name": "com.UpsidePenguin.com.unity.template.mobile2D",
+        "processId": 6614,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,7 +11,37 @@
         {
             "deviceId": "emulator-5554",
             "name": "com.ldmnq.launcher3",
-            "processId": 2332,
+            "processId": 2357,
+            "exited": false
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.UpsidePenguin.com.unity.template.mobile2D",
+            "processId": 5662,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.UpsidePenguin.com.unity.template.mobile2D",
+            "processId": 5878,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.UpsidePenguin.com.unity.template.mobile2D",
+            "processId": 6132,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.UpsidePenguin.com.unity.template.mobile2D",
+            "processId": 6405,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.UpsidePenguin.com.unity.template.mobile2D",
+            "processId": 6614,
             "exited": false
         }
     ],

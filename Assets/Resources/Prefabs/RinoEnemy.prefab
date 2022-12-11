@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cffc4940ee747e48acd2a9563f30ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalForce: 0
-  HorizontalSpeed: 0
+  HorizontalForce: 20
+  HorizontalSpeed: 20
   VerticalForce: 0
   AirFactor: 0
   GroundPoint: {fileID: 0}

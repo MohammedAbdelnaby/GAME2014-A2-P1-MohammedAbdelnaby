@@ -98,7 +98,7 @@ Transform:
   - {fileID: 1975874923}
   - {fileID: 105745611}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9073663173630929515
 SpriteRenderer:
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1827787601
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -6367560908665664636, guid: 3750f45c844123341b9a777a96cb1eca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -184,10 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402cb4af0c69cc347bb892a1a2274c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalForce: 5
-  HorizontalSpeed: 10
-  VerticalForce: 8
-  AirFactor: 8
+  HorizontalForce: 20
+  HorizontalSpeed: 20
+  VerticalForce: 4
+  AirFactor: 4
   GroundPoint: {fileID: 1975874923}
   GroundRadius: 0.6
   GroundLayerMask:
@@ -197,6 +197,12 @@ MonoBehaviour:
   CanDoubleJump: 0
   WallDetectionLength: {fileID: 105745611}
   OnWall: 0
+  CheckPointPostion: {fileID: 0}
+  DeathPlaneValue: -13
+  Life: {fileID: 0}
+  Score: 0
+  ScoreText: {fileID: 0}
+  leftStick: {fileID: 0}
   animator: {fileID: 0}
   playerAnimationState: 0
 --- !u!50 &836883743
@@ -215,7 +221,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 2453eb43985a9b640a3eaa290fea6e5f, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

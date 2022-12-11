@@ -6,10 +6,6 @@ using TMPro;
 
 public class Player : Character
 {
-    /*TODO:
-     * - 
-     */
-
     [Header("Player Properties")]
     public bool CanDoubleJump;
     public Transform WallDetectionLength;
@@ -23,7 +19,7 @@ public class Player : Character
     public TMP_Text ScoreText;
 
     [Header("Controls")]
-    public Joystick leftStick;
+    public FloatingJoystick leftStick;
 
     [Header("Animation")]
     public Animator animator;
@@ -34,7 +30,8 @@ public class Player : Character
 
     protected override void Start()
     {
-        leftStick = (Application.isMobilePlatform) ? GameObject.Find("LeftStick").GetComponent<Joystick>() : null;
+        Debug.Log("Start");
+        //leftStick = GameObject.Find("LeftStick").GetComponent<FloatingJoystick>();
         base.rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         soundManager = FindObjectOfType<SoundManager>();
@@ -43,17 +40,18 @@ public class Player : Character
 
     protected override void Update()
     {
+        //Debug.Log("Update");
         if (Life != null && Life.LifeCount <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
-        IsGrounded = Physics2D.OverlapCircle(GroundPoint.position, GroundRadius, GroundLayerMask);
-        OnWall = Physics2D.Linecast(new Vector3(transform.position.x, transform.position.y, 0.0f),
+        IsGrounded = Physics2D.OverlapCircle(GroundPoint.position, GroundRadius, this.GroundLayerMask);
+        OnWall = Physics2D.Linecast(new Vector3(this.transform.position.x, this.transform.position.y, 0.0f),
                                     new Vector3(WallDetectionLength.position.x, WallDetectionLength.position.y, 0.0f), GroundLayerMask);
-        Move();
-        AirCheck();
-        IsOnWall();
-        DeathPlane();
+        this.Move();
+        this.AirCheck();
+        this.IsOnWall();
+        this.DeathPlane();
     }
 
     void DeathPlane()
@@ -77,7 +75,7 @@ public class Player : Character
 
     protected override void Move()
     {
-        float X = Input.GetAxisRaw("Horizontal") + ((Application.isMobilePlatform) ? leftStick.Horizontal : 0.0f);
+        float X = Input.GetAxisRaw("Horizontal") + leftStick.Horizontal;
         if (X != 0.0f)
         {
             Flip(X);
@@ -88,6 +86,7 @@ public class Player : Character
             rigidbody2D.velocity = new Vector2(clampedXVelocity, rigidbody2D.velocity.y);
 
             ChangeAnimation(PlayerAnimationState.RUN);
+            Debug.Log(HorizontalSpeed);
         }
         if (IsGrounded && X == 0)
         {
@@ -105,6 +104,7 @@ public class Player : Character
 
     protected override void Jump()
     {
+        Debug.Log("Jump");
         if (OnWall && !IsGrounded)
         {
             rigidbody2D.AddForce(((transform.localScale.x > 0.0f) ? Vector2.left : Vector2.right) + Vector2.up * VerticalForce, ForceMode2D.Impulse);
